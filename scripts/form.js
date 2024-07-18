@@ -3,8 +3,8 @@ function validateLogin() {
     const password = document.getElementById('password').value;
 
     // Aquí defines el usuario y la contraseña correctos
-    const correctUsername = 'brisarna';
-    const correctPassword = 'Kurito';
+    const correctUsername = '';
+    const correctPassword = '';
 
     if (username === correctUsername && password === correctPassword) {
         // Abre las ventanas con sus respectivos tamaños y posiciones
