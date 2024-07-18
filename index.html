@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>The project Breeze</title>
+    <link rel="stylesheet" href="css/firstpage.css" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+</head>
+<body class="align">
+    <div class="grid align__item">
+        <div class="login">
+            <h1>¡Hola bienvenida <span class="yourname">Brisa</span>!</h1>
+            <img src="https://preview.redd.it/y238xdzqscta1.png?auto=webp&s=6d2c64feb104fa216ed6996212c5c7fc8568c087" alt="Imagen de Bienvenida">
+            <form id="loginForm" onsubmit="return validateLogin()">
+                <div class="form__field">
+                    <input type="text" id="username" placeholder="Nombre" required>
+                </div>
+                <div class="form__field">
+                    <input type="password" id="password" placeholder="••••••••••••" required>
+                </div>
+                <div class="form__field">
+                    <input type="submit" value="Iniciar Sesión">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="scripts/form.js"></script>
+</body>
+</html>

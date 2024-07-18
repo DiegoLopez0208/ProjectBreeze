@@ -1,0 +1,771 @@
+:root {
+  --stem-color: hsl(159, 56%, 31%);
+  --seeds-color: hsl(25.95, 23.34%, 26.56%);
+  --main-background-color: hsl(196, 81%, 86%);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+  background-color: var(--main-background-color);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  min-height: 80vh;
+}
+
+.soil {
+  z-index: 10;
+  width: 12rem;
+  height: 1.5rem;
+  margin-top: -0.5rem;
+  border-radius: 0.75rem;
+  background-color: var(--seeds-color);
+  position: relative;
+}
+.soil:after {
+  content: "";
+  top: 100%;
+  position: absolute;
+  width: 100%;
+  height: 200%;
+  background-color: var(--main-background-color);
+}
+
+.stem {
+  margin-top: -5%;
+  width: 0.625rem;
+  height: clamp(5rem, 48vh + 1rem, 25rem);
+  border-radius: 0.25rem;
+  background-color: var(--stem-color);
+  animation: 2500ms stem-grow ease-in-out 1;
+}
+
+.leaves {
+  position: relative;
+  top: 40%;
+}
+
+.leaf {
+  width: 3.5rem;
+  height: 3.25rem;
+  background-color: var(--stem-color);
+  border-radius: 80% 0;
+  position: relative;
+}
+.leaf:nth-child(1) {
+  transform: scale(1) rotate(69deg) translate(-2.75rem, 3rem);
+  animation: 1000ms left-leaf-grow ease-in-out 2700ms 1;
+}
+.leaf:nth-child(2) {
+  transform: translate(1.1rem, -4rem) rotate(214deg) scale(1);
+  width: 2.75rem;
+}
+
+.flower {
+  display: grid;
+  grid-template-areas: "stack";
+  justify-items: center;
+  align-items: center;
+  z-index: 10;
+  visibility: hidden;
+}
+.flower.animated {
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  animation: flower-grow 2500ms ease-in-out 1;
+}
+
+.petals {
+  position: relative;
+  grid-area: stack;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .petals {
+    animation: 20000ms flower-rotate linear 2;
+  }
+}
+.seeds {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-area: stack;
+  width: calc(7rem + 2rem);
+  height: calc(7rem + 2rem);
+  border-radius: 50%;
+  background-color: var(--seeds-color);
+  z-index: 1;
+  position: relative;
+}
+.seeds::after {
+  content: "";
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  background: radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 22% 52%/3% 3% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 62% 32%/3% 3% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 62% 58%/3% 3% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 36% 69%/3% 3% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 36% 81%/3% 3% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 49% 70%/4% 4% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 76% 70%/4% 4% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 76% 26%/4% 4% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 18% 62%/4% 4% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 65% 43%/4% 4% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 51% 45%/4% 4% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 38% 50%/5% 5% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 24% 40%/5% 5% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 37% 34%/5% 5% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 54% 28%/5% 5% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 44% 29%/5% 5% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 57% 18%/5% 5% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 47% 18%/6% 6% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 17% 31%/6% 6% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 12% 40%/6% 6% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 34% 21%/6% 6% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 24% 26%/6% 6% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 34% 12%/6% 6% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 23% 11%/6% 6% no-repeat, radial-gradient(100% 100% at 50% 50%, #534134 50%, transparent 51%) 15% 17%/6% 6% no-repeat, #291506;
+}
+
+.petal {
+  position: absolute;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 80% 0% 55% 0/80% 55% 80% 0;
+  background-image: radial-gradient(100% 100% at 50% 50%, hsl(36.71, 95.95%, 51.57%), hsl(48.67, 97.28%, 73.23%));
+  box-shadow: inset 2px 2px 5px transparent;
+}
+.petal.animated:nth-child(1) {
+  animation: grow-1 3000ms ease-in-out 1;
+  animation-delay: 25ms;
+  transform: translateX(0rem) translateY(0rem) rotate(70deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(2) {
+  animation: grow-2 3000ms ease-in-out 1;
+  animation-delay: 50ms;
+  transform: translateX(0rem) translateY(0rem) rotate(85deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(3) {
+  animation: grow-3 3000ms ease-in-out 1;
+  animation-delay: 75ms;
+  transform: translateX(0rem) translateY(0rem) rotate(100deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(4) {
+  animation: grow-4 3000ms ease-in-out 1;
+  animation-delay: 100ms;
+  transform: translateX(0rem) translateY(0rem) rotate(115deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(5) {
+  animation: grow-5 3000ms ease-in-out 1;
+  animation-delay: 125ms;
+  transform: translateX(0rem) translateY(0rem) rotate(130deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(6) {
+  animation: grow-6 3000ms ease-in-out 1;
+  animation-delay: 150ms;
+  transform: translateX(0rem) translateY(0rem) rotate(145deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(7) {
+  animation: grow-7 3000ms ease-in-out 1;
+  animation-delay: 175ms;
+  transform: translateX(0rem) translateY(0rem) rotate(160deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(8) {
+  animation: grow-8 3000ms ease-in-out 1;
+  animation-delay: 200ms;
+  transform: translateX(0rem) translateY(0rem) rotate(175deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(9) {
+  animation: grow-9 3000ms ease-in-out 1;
+  animation-delay: 225ms;
+  transform: translateX(0rem) translateY(0rem) rotate(190deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(10) {
+  animation: grow-10 3000ms ease-in-out 1;
+  animation-delay: 250ms;
+  transform: translateX(0rem) translateY(0rem) rotate(205deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(11) {
+  animation: grow-11 3000ms ease-in-out 1;
+  animation-delay: 275ms;
+  transform: translateX(0rem) translateY(0rem) rotate(220deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(12) {
+  animation: grow-12 3000ms ease-in-out 1;
+  animation-delay: 300ms;
+  transform: translateX(0rem) translateY(0rem) rotate(235deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(13) {
+  animation: grow-13 3000ms ease-in-out 1;
+  animation-delay: 325ms;
+  transform: translateX(0rem) translateY(0rem) rotate(250deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(14) {
+  animation: grow-14 3000ms ease-in-out 1;
+  animation-delay: 350ms;
+  transform: translateX(0rem) translateY(0rem) rotate(265deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(15) {
+  animation: grow-15 3000ms ease-in-out 1;
+  animation-delay: 375ms;
+  transform: translateX(0rem) translateY(0rem) rotate(280deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(16) {
+  animation: grow-16 3000ms ease-in-out 1;
+  animation-delay: 400ms;
+  transform: translateX(0rem) translateY(0rem) rotate(295deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(17) {
+  animation: grow-17 3000ms ease-in-out 1;
+  animation-delay: 425ms;
+  transform: translateX(0rem) translateY(0rem) rotate(310deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(18) {
+  animation: grow-18 3000ms ease-in-out 1;
+  animation-delay: 450ms;
+  transform: translateX(0rem) translateY(0rem) rotate(325deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(19) {
+  animation: grow-19 3000ms ease-in-out 1;
+  animation-delay: 475ms;
+  transform: translateX(0rem) translateY(0rem) rotate(340deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(20) {
+  animation: grow-20 3000ms ease-in-out 1;
+  animation-delay: 500ms;
+  transform: translateX(0rem) translateY(0rem) rotate(355deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(21) {
+  animation: grow-21 3000ms ease-in-out 1;
+  animation-delay: 525ms;
+  transform: translateX(0rem) translateY(0rem) rotate(370deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(22) {
+  animation: grow-22 3000ms ease-in-out 1;
+  animation-delay: 550ms;
+  transform: translateX(0rem) translateY(0rem) rotate(385deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(23) {
+  animation: grow-23 3000ms ease-in-out 1;
+  animation-delay: 575ms;
+  transform: translateX(0rem) translateY(0rem) rotate(400deg) skew(-13deg, -41deg);
+}
+.petal.animated:nth-child(24) {
+  animation: grow-24 3000ms ease-in-out 1;
+  animation-delay: 600ms;
+  transform: translateX(0rem) translateY(0rem) rotate(415deg) skew(-13deg, -41deg);
+}
+.petal.animation-done:nth-child(1) {
+  transform: translateX(4.4253788247rem) translateY(1.1857766823rem) rotate(70deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-1 ease-in-out 1;
+  animation-delay: 80ms;
+}
+.petal.animation-done:nth-child(2) {
+  transform: translateX(3.9676861093rem) translateY(2.2907446432rem) rotate(85deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-2 ease-in-out 1;
+  animation-delay: 160ms;
+}
+.petal.animation-done:nth-child(3) {
+  transform: translateX(3.2396021424rem) translateY(3.2396021424rem) rotate(100deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-3 ease-in-out 1;
+  animation-delay: 240ms;
+}
+.petal.animation-done:nth-child(4) {
+  transform: translateX(2.2907446432rem) translateY(3.9676861093rem) rotate(115deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-4 ease-in-out 1;
+  animation-delay: 320ms;
+}
+.petal.animation-done:nth-child(5) {
+  transform: translateX(1.1857766823rem) translateY(4.4253788247rem) rotate(130deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-5 ease-in-out 1;
+  animation-delay: 400ms;
+}
+.petal.animation-done:nth-child(6) {
+  transform: translateX(0rem) translateY(4.5814892865rem) rotate(145deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-6 ease-in-out 1;
+  animation-delay: 480ms;
+}
+.petal.animation-done:nth-child(7) {
+  transform: translateX(-1.1857766823rem) translateY(4.4253788247rem) rotate(160deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-7 ease-in-out 1;
+  animation-delay: 560ms;
+}
+.petal.animation-done:nth-child(8) {
+  transform: translateX(-2.2907446432rem) translateY(3.9676861093rem) rotate(175deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-8 ease-in-out 1;
+  animation-delay: 640ms;
+}
+.petal.animation-done:nth-child(9) {
+  transform: translateX(-3.2396021424rem) translateY(3.2396021424rem) rotate(190deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-9 ease-in-out 1;
+  animation-delay: 720ms;
+}
+.petal.animation-done:nth-child(10) {
+  transform: translateX(-3.9676861093rem) translateY(2.2907446432rem) rotate(205deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-10 ease-in-out 1;
+  animation-delay: 800ms;
+}
+.petal.animation-done:nth-child(11) {
+  transform: translateX(-4.4253788247rem) translateY(1.1857766823rem) rotate(220deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-11 ease-in-out 1;
+  animation-delay: 880ms;
+}
+.petal.animation-done:nth-child(12) {
+  transform: translateX(-4.5814892865rem) translateY(0rem) rotate(235deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-12 ease-in-out 1;
+  animation-delay: 960ms;
+}
+.petal.animation-done:nth-child(13) {
+  transform: translateX(-4.4253788247rem) translateY(-1.1857766823rem) rotate(250deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-13 ease-in-out 1;
+  animation-delay: 1040ms;
+}
+.petal.animation-done:nth-child(14) {
+  transform: translateX(-3.9676861093rem) translateY(-2.2907446432rem) rotate(265deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-14 ease-in-out 1;
+  animation-delay: 1120ms;
+}
+.petal.animation-done:nth-child(15) {
+  transform: translateX(-3.2396021424rem) translateY(-3.2396021424rem) rotate(280deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-15 ease-in-out 1;
+  animation-delay: 1200ms;
+}
+.petal.animation-done:nth-child(16) {
+  transform: translateX(-2.2907446432rem) translateY(-3.9676861093rem) rotate(295deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-16 ease-in-out 1;
+  animation-delay: 1280ms;
+}
+.petal.animation-done:nth-child(17) {
+  transform: translateX(-1.1857766823rem) translateY(-4.4253788247rem) rotate(310deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-17 ease-in-out 1;
+  animation-delay: 1360ms;
+}
+.petal.animation-done:nth-child(18) {
+  transform: translateX(0rem) translateY(-4.5814892865rem) rotate(325deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-18 ease-in-out 1;
+  animation-delay: 1440ms;
+}
+.petal.animation-done:nth-child(19) {
+  transform: translateX(1.1857766823rem) translateY(-4.4253788247rem) rotate(340deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-19 ease-in-out 1;
+  animation-delay: 1520ms;
+}
+.petal.animation-done:nth-child(20) {
+  transform: translateX(2.2907446432rem) translateY(-3.9676861093rem) rotate(355deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-20 ease-in-out 1;
+  animation-delay: 1600ms;
+}
+.petal.animation-done:nth-child(21) {
+  transform: translateX(3.2396021424rem) translateY(-3.2396021424rem) rotate(370deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-21 ease-in-out 1;
+  animation-delay: 1680ms;
+}
+.petal.animation-done:nth-child(22) {
+  transform: translateX(3.9676861093rem) translateY(-2.2907446432rem) rotate(385deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-22 ease-in-out 1;
+  animation-delay: 1760ms;
+}
+.petal.animation-done:nth-child(23) {
+  transform: translateX(4.4253788247rem) translateY(-1.1857766823rem) rotate(400deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-23 ease-in-out 1;
+  animation-delay: 1840ms;
+}
+.petal.animation-done:nth-child(24) {
+  transform: translateX(4.5814892865rem) translateY(0rem) rotate(415deg) skew(-13deg, -41deg);
+  animation: 2000ms end-animation-24 ease-in-out 1;
+  animation-delay: 1920ms;
+}
+
+@keyframes flower-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes grow-1 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(70deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(4.4253788247rem) translateY(1.1857766823rem) rotate(70deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-2 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(85deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(3.9676861093rem) translateY(2.2907446432rem) rotate(85deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-3 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(100deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(3.2396021424rem) translateY(3.2396021424rem) rotate(100deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-4 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(115deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(2.2907446432rem) translateY(3.9676861093rem) rotate(115deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-5 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(130deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(1.1857766823rem) translateY(4.4253788247rem) rotate(130deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-6 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(145deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(0rem) translateY(4.5814892865rem) rotate(145deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-7 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(160deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-1.1857766823rem) translateY(4.4253788247rem) rotate(160deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-8 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(175deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-2.2907446432rem) translateY(3.9676861093rem) rotate(175deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-9 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(190deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-3.2396021424rem) translateY(3.2396021424rem) rotate(190deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-10 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(205deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-3.9676861093rem) translateY(2.2907446432rem) rotate(205deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-11 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(220deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-4.4253788247rem) translateY(1.1857766823rem) rotate(220deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-12 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(235deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-4.5814892865rem) translateY(0rem) rotate(235deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-13 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(250deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-4.4253788247rem) translateY(-1.1857766823rem) rotate(250deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-14 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(265deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-3.9676861093rem) translateY(-2.2907446432rem) rotate(265deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-15 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(280deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-3.2396021424rem) translateY(-3.2396021424rem) rotate(280deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-16 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(295deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-2.2907446432rem) translateY(-3.9676861093rem) rotate(295deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-17 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(310deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-1.1857766823rem) translateY(-4.4253788247rem) rotate(310deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-18 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(325deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(0rem) translateY(-4.5814892865rem) rotate(325deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-19 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(340deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(1.1857766823rem) translateY(-4.4253788247rem) rotate(340deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-20 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(355deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(2.2907446432rem) translateY(-3.9676861093rem) rotate(355deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-21 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(370deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(3.2396021424rem) translateY(-3.2396021424rem) rotate(370deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-22 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(385deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(3.9676861093rem) translateY(-2.2907446432rem) rotate(385deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-23 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(400deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(4.4253788247rem) translateY(-1.1857766823rem) rotate(400deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes grow-24 {
+  0% {
+    transform: translateX(0rem) translateY(0rem) rotate(415deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(4.5814892865rem) translateY(0rem) rotate(415deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-1 {
+  0% {
+    transform: translateX(4.4253788247rem) translateY(1.1857766823rem) rotate(70deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(5.3104545896rem) translateY(1.4229320187rem) rotate(70deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-2 {
+  0% {
+    transform: translateX(3.9676861093rem) translateY(2.2907446432rem) rotate(85deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(4.7612233311rem) translateY(2.7488935719rem) rotate(85deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-3 {
+  0% {
+    transform: translateX(3.2396021424rem) translateY(3.2396021424rem) rotate(100deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(3.8875225709rem) translateY(3.8875225709rem) rotate(100deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-4 {
+  0% {
+    transform: translateX(2.2907446432rem) translateY(3.9676861093rem) rotate(115deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(2.7488935719rem) translateY(4.7612233311rem) rotate(115deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-5 {
+  0% {
+    transform: translateX(1.1857766823rem) translateY(4.4253788247rem) rotate(130deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(1.4229320187rem) translateY(5.3104545896rem) rotate(130deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-6 {
+  0% {
+    transform: translateX(0rem) translateY(4.5814892865rem) rotate(145deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(0rem) translateY(5.4977871438rem) rotate(145deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-7 {
+  0% {
+    transform: translateX(-1.1857766823rem) translateY(4.4253788247rem) rotate(160deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-1.4229320187rem) translateY(5.3104545896rem) rotate(160deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-8 {
+  0% {
+    transform: translateX(-2.2907446432rem) translateY(3.9676861093rem) rotate(175deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-2.7488935719rem) translateY(4.7612233311rem) rotate(175deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-9 {
+  0% {
+    transform: translateX(-3.2396021424rem) translateY(3.2396021424rem) rotate(190deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-3.8875225709rem) translateY(3.8875225709rem) rotate(190deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-10 {
+  0% {
+    transform: translateX(-3.9676861093rem) translateY(2.2907446432rem) rotate(205deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-4.7612233311rem) translateY(2.7488935719rem) rotate(205deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-11 {
+  0% {
+    transform: translateX(-4.4253788247rem) translateY(1.1857766823rem) rotate(220deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-5.3104545896rem) translateY(1.4229320187rem) rotate(220deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-12 {
+  0% {
+    transform: translateX(-4.5814892865rem) translateY(0rem) rotate(235deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-5.4977871438rem) translateY(0rem) rotate(235deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-13 {
+  0% {
+    transform: translateX(-4.4253788247rem) translateY(-1.1857766823rem) rotate(250deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-5.3104545896rem) translateY(-1.4229320187rem) rotate(250deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-14 {
+  0% {
+    transform: translateX(-3.9676861093rem) translateY(-2.2907446432rem) rotate(265deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-4.7612233311rem) translateY(-2.7488935719rem) rotate(265deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-15 {
+  0% {
+    transform: translateX(-3.2396021424rem) translateY(-3.2396021424rem) rotate(280deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-3.8875225709rem) translateY(-3.8875225709rem) rotate(280deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-16 {
+  0% {
+    transform: translateX(-2.2907446432rem) translateY(-3.9676861093rem) rotate(295deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-2.7488935719rem) translateY(-4.7612233311rem) rotate(295deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-17 {
+  0% {
+    transform: translateX(-1.1857766823rem) translateY(-4.4253788247rem) rotate(310deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(-1.4229320187rem) translateY(-5.3104545896rem) rotate(310deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-18 {
+  0% {
+    transform: translateX(0rem) translateY(-4.5814892865rem) rotate(325deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(0rem) translateY(-5.4977871438rem) rotate(325deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-19 {
+  0% {
+    transform: translateX(1.1857766823rem) translateY(-4.4253788247rem) rotate(340deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(1.4229320187rem) translateY(-5.3104545896rem) rotate(340deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-20 {
+  0% {
+    transform: translateX(2.2907446432rem) translateY(-3.9676861093rem) rotate(355deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(2.7488935719rem) translateY(-4.7612233311rem) rotate(355deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-21 {
+  0% {
+    transform: translateX(3.2396021424rem) translateY(-3.2396021424rem) rotate(370deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(3.8875225709rem) translateY(-3.8875225709rem) rotate(370deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-22 {
+  0% {
+    transform: translateX(3.9676861093rem) translateY(-2.2907446432rem) rotate(385deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(4.7612233311rem) translateY(-2.7488935719rem) rotate(385deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-23 {
+  0% {
+    transform: translateX(4.4253788247rem) translateY(-1.1857766823rem) rotate(400deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(5.3104545896rem) translateY(-1.4229320187rem) rotate(400deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes end-animation-24 {
+  0% {
+    transform: translateX(4.5814892865rem) translateY(0rem) rotate(415deg) skew(-13deg, -41deg);
+  }
+  100% {
+    transform: translateX(5.4977871438rem) translateY(0rem) rotate(415deg) skew(-13deg, -41deg);
+  }
+}
+@keyframes stem-grow {
+  from {
+    height: 0;
+  }
+}
+@keyframes flower-grow {
+  from {
+    transform: translateY(50%) scale(0);
+  }
+}/*# sourceMappingURL=flower.css.map */
